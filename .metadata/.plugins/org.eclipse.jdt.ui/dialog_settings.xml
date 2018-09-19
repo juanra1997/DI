@@ -2,14 +2,16 @@
 <section name="Workbench">
 	<section name="FatJarPackageWizard">
 		<item value="D:\2º DAM\REPOSITORIOS\DI" key="FatJarPackageWizardPage.ANTSCRIPT_LOCATION"/>
-		<item value="Principal - EinicialJuanRaul" key="FatJarPackageWizardPage.LAUNCH_CONFIGURATION_SELECTION_NAME"/>
-		<item value="C:\Users\Juanra\Desktop\PruebaMarco.jar" key="FatJarPackageWizardPage.DESTINATION_PATH_SELECTION"/>
+		<item value="PrimeraPracticaPropuesta - PrimerosPasos2018" key="FatJarPackageWizardPage.LAUNCH_CONFIGURATION_SELECTION_NAME"/>
+		<item value="C:\Users\Juanra\Desktop\PrimeraPracticaPropuesta.jar" key="FatJarPackageWizardPage.DESTINATION_PATH_SELECTION"/>
 		<item value="false" key="FatJarPackageWizardPage.ANTSCRIPT_SAVE"/>
 		<item value="1" key="FatJarPackageWizardPage.LIBRARY_HANDLING"/>
 		<list key="FatJarPackageWizardPage.DESTINATION_NAMES_ID">
+			<item value="C:\Users\Juanra\Desktop\PrimeraPracticaPropuesta.jar"/>
 			<item value="C:\Users\Juanra\Desktop\PruebaMarco.jar"/>
 		</list>
 		<list key="FatJarPackageWizardPage.ANTSCRIPT_LOCATION_HISTORY">
+			<item value="D:\2º DAM\REPOSITORIOS\DI.xml"/>
 			<item value=".xml"/>
 		</list>
 	</section>
