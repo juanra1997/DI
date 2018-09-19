@@ -1,6 +1,5 @@
 package inicial;
 
-
 import javax.swing.JFrame;
 
 public class Principal {
