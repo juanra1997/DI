@@ -1,5 +1,7 @@
 package inicial;
 
+import java.awt.Dimension;
+
 import javax.swing.JFrame;
 
 public class Ventana extends JFrame{
