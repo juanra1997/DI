@@ -23,7 +23,7 @@ class VentanaBis extends JFrame {
 		
 		setTitle("SegundaBis Practica Propuesta");
 		Toolkit herramientas=Toolkit.getDefaultToolkit();
-		setIconImage(herramientas.getImage("marco.jpg"));
+		setIconImage(herramientas.getImage("src/practicasPropuestas/marco.jpg"));
 		setSize(herramientas.getScreenSize());
 	}
 }

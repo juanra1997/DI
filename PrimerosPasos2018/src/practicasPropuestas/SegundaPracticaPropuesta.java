@@ -1,6 +1,5 @@
 package practicasPropuestas;
 
-import java.awt.Image;
 import java.awt.Toolkit;
 import javax.swing.JFrame;
 
@@ -25,7 +24,6 @@ class Ventana extends JFrame {
 		setResizable(false);
 		setTitle("Segunda Practica Propuesta");
 		Toolkit herramientas=Toolkit.getDefaultToolkit();
-		Image icono=herramientas.getImage("insti.jpg");
-		setIconImage(icono);
+		setIconImage(herramientas.getImage("src/practicasPropuestas/insti.jpg"));
 	}
 }
