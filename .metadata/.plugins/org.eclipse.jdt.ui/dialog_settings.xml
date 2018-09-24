@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
 	<section name="FatJarPackageWizard">
-		<item value="D:\2º DAM\REPOSITORIOS\DI" key="FatJarPackageWizardPage.ANTSCRIPT_LOCATION"/>
-		<item value="SegundaBisPracticaPropuesta - PrimerosPasos2018" key="FatJarPackageWizardPage.LAUNCH_CONFIGURATION_SELECTION_NAME"/>
-		<item value="C:\Users\Juanra\Desktop\SegundaBisPracticaPropuesta.jar" key="FatJarPackageWizardPage.DESTINATION_PATH_SELECTION"/>
+		<item value="D:\2º DAM\REPOSITORIOS\DI.xml" key="FatJarPackageWizardPage.ANTSCRIPT_LOCATION"/>
+		<item value="CreandoMarcoCentrado - PrimerosPasos2018" key="FatJarPackageWizardPage.LAUNCH_CONFIGURATION_SELECTION_NAME"/>
+		<item value="C:\prueba\SegundaBisPracticaPropuesta.jar" key="FatJarPackageWizardPage.DESTINATION_PATH_SELECTION"/>
 		<item value="false" key="FatJarPackageWizardPage.ANTSCRIPT_SAVE"/>
 		<item value="1" key="FatJarPackageWizardPage.LIBRARY_HANDLING"/>
 		<list key="FatJarPackageWizardPage.DESTINATION_NAMES_ID">
+			<item value="C:\prueba\SegundaBisPracticaPropuesta.jar"/>
+			<item value="C:\Users\windiurno\Desktop\SegundaBisPracticaPropuesta.jar"/>
 			<item value="C:\Users\Juanra\Desktop\SegundaBisPracticaPropuesta.jar"/>
 			<item value="C:\Users\Juanra\Desktop\SegundaPracticaPropuesta.jar"/>
 			<item value="C:\Users\Juanra\Desktop\PrimeraPracticaPropuesta.jar"/>
