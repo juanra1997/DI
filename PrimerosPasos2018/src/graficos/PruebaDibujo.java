@@ -73,4 +73,4 @@ class LaminaTexto1 extends JPanel {
 	}
 }
 
-//Dentro del paquete de practicasPropuestas. Tercera practica propuesta. Crea una ventana, en la cual aparecerá el texto "cabecera" en l aparte superior centrada y el texto "pie" en la parte inferior derecha
+//Dentro del paquete de practicasPropuestas. Tercera practica propuesta. Crea una ventana, en la cual aparecerá el texto "cabecera" en la parte superior centrada y el texto "pie" en la parte inferior derecha
