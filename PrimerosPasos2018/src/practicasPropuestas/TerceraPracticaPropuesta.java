@@ -12,6 +12,7 @@ public class TerceraPracticaPropuesta extends JFrame {
 	public static void main(String[] args) {
 
 		TerceraPracticaPropuesta miVentana=new TerceraPracticaPropuesta();
+		miVentana.setVisible(true);
 	}
 
 	public TerceraPracticaPropuesta() {
@@ -25,7 +26,7 @@ public class TerceraPracticaPropuesta extends JFrame {
 		add(sup, BorderLayout.PAGE_START);
 		add(inf, BorderLayout.PAGE_END);
 		
-		setVisible(true);
+		//setVisible(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setTitle("Primera Practica Propuesta");
 		setSize(500,300);
