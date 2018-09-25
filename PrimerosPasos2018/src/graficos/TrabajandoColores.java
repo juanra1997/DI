@@ -17,7 +17,7 @@ public class TrabajandoColores {
 
 		//2º Instanciar la ventana
 		
-		MarcoVentanaTexto2 miMarco=new MarcoVentanaTexto2();
+		LaminaFuente miMarco=new LaminaFuente();
 		miMarco.setVisible(true);
 		miMarco.setResizable(true);
 		miMarco.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -40,7 +40,7 @@ class MarcoVentanaTexto2 extends JFrame {
 		
 		//4º Instanciamos la lamina
 		
-		LaminaTexto2 miLamina=new LaminaTexto2();
+		LaminaTexto3 miLamina=new LaminaTexto3();
 		add(miLamina);
 	}
 		
