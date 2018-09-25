@@ -1,20 +1,23 @@
 package graficos;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.geom.Ellipse2D;
+import java.awt.SystemColor;
+//import java.awt.SystemColor;
+//import java.awt.geom.Ellipse2D;
 import java.awt.geom.Rectangle2D;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-public class PruebaDibujo {
+public class TrabajandoColores {
 
 	public static void main(String[] args) {
 
 		//2º Instanciar la ventana
 		
-		MarcoVentanaTexto1 miMarco=new MarcoVentanaTexto1();
+		MarcoVentanaTexto2 miMarco=new MarcoVentanaTexto2();
 		miMarco.setVisible(true);
 		miMarco.setResizable(true);
 		miMarco.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -25,11 +28,11 @@ public class PruebaDibujo {
 
 	//1º Creamos la ventana
 	
-class MarcoVentanaTexto1 extends JFrame {
+class MarcoVentanaTexto2 extends JFrame {
 		
 	private static final long serialVersionUID = 1L;
 		
-	public MarcoVentanaTexto1(){
+	public MarcoVentanaTexto2(){
 			
 		setSize(405,400);
 		setLocationRelativeTo(null);
@@ -37,7 +40,7 @@ class MarcoVentanaTexto1 extends JFrame {
 		
 		//4º Instanciamos la lamina
 		
-		LaminaTexto1 miLamina=new LaminaTexto1();
+		LaminaTexto2 miLamina=new LaminaTexto2();
 		add(miLamina);
 	}
 		
@@ -45,7 +48,7 @@ class MarcoVentanaTexto1 extends JFrame {
 
 //3º Creamos una lamina/Panel
 
-class LaminaTexto1 extends JPanel {
+class LaminaTexto2 extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 	
@@ -71,18 +74,41 @@ class LaminaTexto1 extends JPanel {
 //		g2.draw(new Ellipse2D.Double(290, 10, 100, 100));
 //		g.drawArc(150, 145, 100, 100, 195, 150);
 		//g.drawLine(0, 0, 430, 400);
+		/*Color color1=new Color(150, 254, 254);
+		g2.setPaint(color1);
 		g2.draw(rectangulo);
 		Ellipse2D elipse=new Ellipse2D.Double(rectangulo.getX(), rectangulo.getY(), rectangulo.getWidth(), rectangulo.getHeight());
+		g2.setPaint(Color.RED);
 		g2.draw(elipse);
+		g.setColor(Color.YELLOW);
 		g.drawLine(100, 100, 300, 250);
 		g.drawLine(300, 100, 100, 250);
 		Ellipse2D elipse2=new Ellipse2D.Double();
 		elipse2.setFrameFromCenter(rectangulo.getCenterX(), rectangulo.getCenterY(), rectangulo.getCenterX()+125, rectangulo.getCenterY()+125);
+		g2.setPaint(Color.RED);
 		g2.draw(elipse2);
 		Ellipse2D elipse3=new Ellipse2D.Double();
+		g2.setPaint(Color.YELLOW);
 		elipse3.setFrameFromCenter(rectangulo.getCenterX(), rectangulo.getCenterY(), rectangulo.getCenterX()+150, rectangulo.getCenterY()+150);
 		g2.draw(elipse3);
-		
+		Ellipse2D elipse4=new Ellipse2D.Double();
+		g2.setPaint(new Color(150, 254, 254));
+		elipse4.setFrameFromCenter(rectangulo.getCenterX(), rectangulo.getCenterY(), rectangulo.getCenterX()+175, rectangulo.getCenterY()+175);
+		g2.draw(elipse4);
+		//g.drawString("Empezamos con el color", 5, 10);
+		g2.setPaint(new Color(255, 0, 255));
+		//g2.drawString("Empezamos con el color", 5, 10);
+		//Instanciamos un color
+		//Color color1=new Color(150, 254, 254);
+		//g2.setPaint(color1);
+		g2.drawString("Empezamos con el color", 5, 10);
+		setBackground(Color.BLACK);*/
+		g2.setPaint(new Color(0, 0, 153));
+		g2.draw(rectangulo);
+		g2.setPaint(new Color(255, 0, 255));
+		//g2.draw(rectangulo);
+		g2.fill(rectangulo);
+		setBackground(SystemColor.window);
 	}
 }
 
