@@ -2,10 +2,11 @@ package practicasPropuestas;
 
 import java.awt.BasicStroke;
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.geom.Ellipse2D;
-import java.awt.geom.Point2D;
+//import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
 import java.awt.geom.RoundRectangle2D;
 
@@ -28,9 +29,9 @@ class NoMovilesVentana extends JFrame {
 	
 	public NoMovilesVentana() {
 		
-		setSize(1000,1000);
+		setSize(1000,1200);
 		setLocationRelativeTo(null);
-		setTitle("Primer texto en ventana");
+		setTitle("Prohibido telefonos moviles");
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		add(new NoMoviles());
@@ -73,6 +74,9 @@ class NoMoviles extends JPanel {
 		g2.setStroke(new BasicStroke(90f));
 		g2.setPaint(Color.RED);
 		g.drawLine(250, 250, 750, 750);
+		
+		g.setFont(new Font("Arial", Font.BOLD, 60));
+		g.drawString("PROHIBIDOS", 310, 1000);
 	}
 	
 }
