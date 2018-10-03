@@ -1,4 +1,4 @@
-package paneles;
+package practicasPropuestas;
 
 import java.awt.Component;
 import java.awt.Graphics;

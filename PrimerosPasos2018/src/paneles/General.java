@@ -5,6 +5,7 @@ import java.awt.Color;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+//import javax.swing.JOptionPane;
 //import javax.swing.JLabel;
 //import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -57,8 +58,11 @@ public class General {
 		
 		//------------------------------------------------------------------------------------------------------
 		
-		/*String[] op= {"op1", "op2", "op3", "op4", "op5", "op6", "op7", "op8", "op9", "op10", "op11"};
-		int seleccion=JOptionPane.showOptionDialog(null, "CHOOSE", "ONLY A TITLE", JOptionPane.CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE, mio, op, 0);*/
+		//String[] op= {"Guardar", "Salir", "Cerrar", "Abrir"/*, "op5", "op6", "op7", "op8", "op9", "op10", "op11"*/};
+		/*int seleccion=JOptionPane.showOptionDialog(null, "CHOOSE", "ONLY A TITLE", JOptionPane.CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE, mio, op, 0);
+		if(seleccion==0) {
+			JOptionPane.showMessageDialog(null, "Archivo guardado");
+		}*/
 		
 		//------------------------------------------------------------------------------------------------------
 		
