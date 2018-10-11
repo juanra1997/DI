@@ -72,7 +72,7 @@ class LaminaFoco extends JPanel implements FocusListener {
 
 	@Override
 	public void focusLost(FocusEvent e) {
-		
+
 		//JOptionPane.showMessageDialog(null, "Has perdido la dignidad");
 		String email=campoEmail.getText();
 		boolean comprobacion=false;
