@@ -30,7 +30,7 @@ public class MiIcon implements Icon {
 	public void paintIcon(Component c, Graphics g, int x, int y) {
 		// TODO Auto-generated method stub
 		try {
-			Image img=ImageIO.read(new File("C:\\Users\\Juanra\\Pictures\\[WE] A2 vs B2\\f1y0bb.png"));
+			Image img=ImageIO.read(new File("f1y0bb.png"));
 			g.drawImage(img, x, y, c);
 		} catch (IOException e) {
 			JOptionPane.showMessageDialog(null, "ERROOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOR", "CULPA DE TU IMAGEN", JOptionPane.WARNING_MESSAGE);
