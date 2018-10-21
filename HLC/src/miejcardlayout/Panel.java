@@ -14,9 +14,9 @@ import javax.swing.JPanel;
  */
 public class Panel extends JPanel {
 
-	private static final long serialVersionUID = 1L;
-	
-	PanelBotones pb;
+    private static final long serialVersionUID = 1L;
+    
+    PanelBotones pb;
     PanelTexto pt;
     
     public Panel(){
@@ -35,5 +35,21 @@ public class Panel extends JPanel {
         pb=new PanelBotones();
         pb.setAlignmentX(JPanel.CENTER_ALIGNMENT);
         add(pb);
+    }
+
+    public PanelBotones getPb() {
+        return pb;
+    }
+
+    public void setPb(PanelBotones pb) {
+        this.pb = pb;
+    }
+
+    public PanelTexto getPt() {
+        return pt;
+    }
+
+    public void setPt(PanelTexto pt) {
+        this.pt = pt;
     }
 }

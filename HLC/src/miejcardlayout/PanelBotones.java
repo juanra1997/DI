@@ -60,4 +60,36 @@ public class PanelBotones extends JPanel {
         
         //add(Box.createGlue());
     }
+
+    public JButton getPrimero() {
+        return primero;
+    }
+
+    public void setPrimero(JButton primero) {
+        this.primero = primero;
+    }
+
+    public JButton getPrevio() {
+        return previo;
+    }
+
+    public void setPrevio(JButton previo) {
+        this.previo = previo;
+    }
+
+    public JButton getSiguiente() {
+        return siguiente;
+    }
+
+    public void setSiguiente(JButton siguiente) {
+        this.siguiente = siguiente;
+    }
+
+    public JButton getUltimo() {
+        return ultimo;
+    }
+
+    public void setUltimo(JButton ultimo) {
+        this.ultimo = ultimo;
+    }
 }

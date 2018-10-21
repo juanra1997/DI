@@ -29,17 +29,28 @@ public class PanelTexto extends JPanel{
     public void iniciaComponentes(){
         
         //setSize(600, 200);
+    	//setLayout(null);
         
         texto=new JTextField();
         texto.setEditable(false);
         texto.setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));
         texto.setHorizontalAlignment(JTextField.CENTER);
+        //texto.setText("Prueba");
         //texto.setMaximumSize(new Dimension(300, 100));
-        texto.setPreferredSize(new Dimension(582,1200));
+        texto.setPreferredSize(new Dimension(500, 40));
+        //texto.setSize(new Dimension(582,1200));
         add(texto);
         
-        setSize(40,10);
+        setPreferredSize(new Dimension(40,800));
         
-        //setBorder(BorderFactory.createLineBorder(Color.BLACK, 3));
+        //setBorder(BorderFactory.createLineBorder(Color.BLACK, 10));
+    }
+
+    public JTextField getTexto() {
+        return texto;
+    }
+
+    public void setTexto(JTextField texto) {
+        this.texto = texto;
     }
 }

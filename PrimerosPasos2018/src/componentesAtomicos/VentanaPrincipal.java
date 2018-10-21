@@ -1,6 +1,9 @@
 package componentesAtomicos;
 
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 //import javax.swing.*;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
@@ -8,6 +11,7 @@ import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 import javax.swing.JRadioButton;
@@ -15,11 +19,14 @@ import javax.swing.JSeparator;
 import javax.swing.JSlider;
 import javax.swing.JSpinner;
 import javax.swing.JToggleButton;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 
-public class VentanaPrincipal extends JFrame{
+public class VentanaPrincipal extends JFrame implements ActionListener, ChangeListener {
 
 	private JPanel contenedor;
-	private JLabel lbTitulo, lbLabel, lbBoton, lbTongleButton, lbCheckBox, lbRadioButtons, lbEtiqueta;
+	private JLabel lbTitulo, lbLabel, lbBoton, lbTongleButton, lbCheckBox, lbRadioButtons;
+	private JLabel lbEtiqueta, lbCombo, lbSeparador, lbSpiner, lbDeslizador, lbBarra;
 	private JButton bBoton;
 	private JCheckBox cbCB1, cbCB2;
 	private JRadioButton rbBoton1, rbBoton2;
@@ -103,21 +110,22 @@ public class VentanaPrincipal extends JFrame{
 		bBoton=new JButton();
 		
 		bBoton.setText("BOTON");
-		bBoton.setBounds(80, 80, 80, 23);
+		bBoton.setBounds(120, 80, 80, 23);
+		bBoton.addActionListener(this);
 		contenedor.add(bBoton);
 		
 		//-----------------------------------------------------------------------------------------------------
 		
 		cbCB1=new JCheckBox();
 		cbCB1.setText("Check 1");
-		cbCB1.setBounds(100, 110, 72, 23);
+		cbCB1.setBounds(120, 110, 72, 23);
 		contenedor.add(cbCB1);
 
 		//-----------------------------------------------------------------------------------------------------
 		
 		cbCB2=new JCheckBox();
 		cbCB2.setText("Check 2");
-		cbCB2.setBounds(170, 110, 80, 23);
+		cbCB2.setBounds(190, 110, 80, 23);
 		contenedor.add(cbCB2);
 		
 		//-----------------------------------------------------------------------------------------------------
@@ -125,7 +133,7 @@ public class VentanaPrincipal extends JFrame{
 		rbBoton1=new JRadioButton();
 		
 		rbBoton1.setText("Radio 1");
-		rbBoton1.setBounds(110, 140, 67, 23);
+		rbBoton1.setBounds(120, 140, 67, 23);
 		contenedor.add(rbBoton1);
 		
 		//-----------------------------------------------------------------------------------------------------
@@ -133,7 +141,7 @@ public class VentanaPrincipal extends JFrame{
 		rbBoton2=new JRadioButton();
 		
 		rbBoton2.setText("Radio 2");
-		rbBoton2.setBounds(173, 140, 80, 23);
+		rbBoton2.setBounds(183, 140, 80, 23);
 		contenedor.add(rbBoton2);
 		
 		//-----------------------------------------------------------------------------------------------------
@@ -156,7 +164,7 @@ public class VentanaPrincipal extends JFrame{
 		lbEtiqueta=new JLabel();
 		
 		lbEtiqueta.setText("Esto es una etiqueta");
-		lbEtiqueta.setBounds(70, 50, 120, 23);
+		lbEtiqueta.setBounds(120, 50, 120, 23);
 		contenedor.add(lbEtiqueta);
 		
 		//-----------------------------------------------------------------------------------------------------
@@ -195,6 +203,7 @@ public class VentanaPrincipal extends JFrame{
 		deslizador.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		deslizador.setPaintLabels(true);
 		deslizador.setPaintTrack(true);
+		deslizador.addChangeListener(this);
 		contenedor.add(deslizador);
 		
 		//-----------------------------------------------------------------------------------------------------
@@ -202,16 +211,121 @@ public class VentanaPrincipal extends JFrame{
 		spiner=new JSpinner();
 		
 		spiner.setBounds(430, 105, 100, 30);
+		spiner.setValue(30);
+		spiner.addChangeListener(this);
 		contenedor.add(spiner);
 		
 		//-----------------------------------------------------------------------------------------------------
 		
-		barra=new JProgressBar();
+		barra=new JProgressBar(0, 100);
 		
 		barra.setBounds(430, 190, 110, 23);
+		barra.setValue(deslizador.getValue());
 		contenedor.add(barra);
 		
 		//-----------------------------------------------------------------------------------------------------
+		//**********************************************
+		lbCombo=new JLabel();
+		
+		lbCombo.setText("JComboBox: ");
+		lbCombo.setBounds(335, 50, 80, 23);
+		contenedor.add(lbCombo);
+		
+		//-----------------------------------------------------------------------------------------------------
+		
+		lbSeparador=new JLabel();
+		
+		lbSeparador.setText("JSeparator: ");
+		lbSeparador.setBounds(335, 80, 80, 23);
+		contenedor.add(lbSeparador);
+		
+		//-----------------------------------------------------------------------------------------------------
+		
+		lbSpiner=new JLabel();
+		
+		lbSpiner.setText("JSpinner: ");
+		lbSpiner.setBounds(335, 110, 80, 23);
+		contenedor.add(lbSpiner);
+		
+		//-----------------------------------------------------------------------------------------------------
+		
+		lbDeslizador=new JLabel();
+		
+		lbDeslizador.setText("JSlider: ");
+		lbDeslizador.setBounds(335, 155, 80, 23);
+		contenedor.add(lbDeslizador);
+		
+		//-----------------------------------------------------------------------------------------------------
+		
+		lbBarra=new JLabel();
+		
+		lbBarra.setText("JProgressBar: ");
+		lbBarra.setBounds(335, 190, 100, 23);
+		contenedor.add(lbBarra);
+		
+		//-----------------------------------------------------------------------------------------------------
+		
 		add(contenedor);
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent arg0) {
+
+		if(arg0.getSource()==bBoton) {
+			JOptionPane.showMessageDialog(null, validaSalida());
+		}
+	}
+	
+	private String validaSalida() {
+		
+		String cad="Seleccionado: \n";
+		if(cbCB1.isSelected()) {
+			cad=cad+"JCheckBox 1: Activado\n";
+		} else {
+			cad=cad+"JCheckBox 1: Desctivado\n";
+		}
+		if(cbCB2.isSelected()) {
+			cad=cad+"JCheckBox 2\n";
+		} else {
+			cad=cad+"JCheckBox 2: Desctivado\n";
+		}
+		if(rbBoton1.isSelected()) {
+			cad=cad+"JRadioButton 1: Activado\n";
+		} else {
+			cad=cad+"JRadioButton 1: Desctivado\n";
+		}
+		if(rbBoton2.isSelected()) {
+			cad=cad+"JRadioButton 1: Activado\n";
+		} else {
+			cad=cad+"JRadioButton 2: Desctivado\n";
+		}
+		if(tbTogle.isSelected()) {
+			cad=cad+"JToggleButton: Activado\n";
+		} else {
+			cad=cad+"JToggleButton: Desctivado\n";
+		}
+		cad=cad+"ComboBox: "+combo.getSelectedItem()+"\n";
+		//cad=cad+"Spinner: "+spiner.getValue()+"\n";
+		//cad=cad+"Slider: "+deslizador.getValue()+"\n";
+		
+		return cad;
+	}
+
+	@Override
+	public void stateChanged(ChangeEvent arg0) {
+		// TODO Auto-generated method stub
+		int valor;
+		
+		if(arg0.getSource()==spiner) {
+			valor=(int) spiner.getValue();
+			deslizador.setValue(valor);
+			barra.setValue(valor);
+		}
+		
+		if(arg0.getSource()==deslizador) {
+			valor=(int) deslizador.getValue();
+			spiner.setValue(valor);
+			barra.setValue(valor);
+		}
 	}
 }

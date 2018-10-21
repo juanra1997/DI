@@ -16,6 +16,7 @@ public class Principal {
     public static void main(String[] args){
         
         Ventana miVentana=new Ventana();
+        new Control(miVentana);
         miVentana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         miVentana.setSize(600, 400);
         miVentana.setLocationRelativeTo(null);

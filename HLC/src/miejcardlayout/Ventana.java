@@ -6,7 +6,10 @@
 package miejcardlayout;
 
 //import java.awt.BorderLayout;
-//import java.awt.CardLayout;
+import java.awt.CardLayout;
+import java.awt.Color;
+//import java.awt.event.ActionListener;
+
 import javax.swing.JFrame;
 
 /**
@@ -15,20 +18,48 @@ import javax.swing.JFrame;
  */
 public class Ventana extends JFrame {
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 	
-	Panel p=new Panel();
+    Panel p0=new Panel();
+    Panel p1=new Panel();
+    Panel p2=new Panel();
+    Panel p3=new Panel();
     PanelTexto pt=new PanelTexto();
     PanelBotones pb=new PanelBotones();
+    CardLayout cl;
     
     public Ventana(){
         
         iniciaComponentes();
+        
     }
     
     public void iniciaComponentes(){
         
-        //setLayout(new CardLayout());
-        add(p);
+    	cl=new CardLayout();
+        setLayout(cl);
+        p0.getPt().getTexto().setText("Panel 1");
+        p0.getPt().setBackground(Color.WHITE);
+        p0.getPb().setBackground(Color.WHITE);
+        /*p.getPb().getPrimero().addActionListener(new ActionListener(){
+        
+        });*/
+        add(p0);
+        
+        p1.getPt().setBackground(Color.CYAN);
+        p1.getPb().setBackground(Color.CYAN);
+        p1.getPt().getTexto().setText("Panel 2");
+        add(p1);
+        
+        p2.getPt().setBackground(Color.RED);
+        p2.getPb().setBackground(Color.RED);
+        p2.getPt().getTexto().setText("Panel 3");
+        add(p2);
+        
+        p3.getPt().setBackground(Color.BLACK);
+        p3.getPb().setBackground(Color.BLACK);
+        p3.getPt().getTexto().setText("Panel 4");
+        add(p3);
     }
 }
+
