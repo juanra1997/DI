@@ -56,6 +56,7 @@ class PanelPL2 extends JPanel implements ActionListener{
 	
 	double op1='0', op2='0';
 	String opr=null;
+	boolean operado=false;
 	
 	public PanelPL2() {
 		
@@ -120,7 +121,13 @@ class PanelPL2 extends JPanel implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		
-		
+		if(operado) {
+			t.setText("0");
+			operado=false;
+			op1='0';
+			op2='0';
+			opr=null;
+		}
 		
 		if(e.getSource()==b1) {
 			
@@ -347,12 +354,16 @@ class PanelPL2 extends JPanel implements ActionListener{
 			op2=Double.parseDouble(t.getText());
 			if(opr.equals("sumar")) {
 				t.setText(String.valueOf((op1+op2)));
+				operado=true;
 			} else if(opr.equals("restar")) {
 				t.setText(String.valueOf((op1-op2)));
+				operado=true;
 			} else if(opr.equals("multiplicar")) {
 				t.setText(String.valueOf((op1*op2)));
+				operado=true;
 			} else if(opr.equals("dividir")) {
 				t.setText(String.valueOf((op1/op2)));
+				operado=true;
 			}
 		}
 	}

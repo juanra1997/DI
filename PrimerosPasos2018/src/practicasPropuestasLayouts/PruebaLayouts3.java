@@ -34,6 +34,7 @@ class VentanaPL3 extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setLocationRelativeTo(null);
 		setTitle("Paneles Juan Raul Mellado Garcia");
+		setResizable(false);
 		//setVisible(true);
 		
 		add(pp);
@@ -174,6 +175,20 @@ class Panel2PL3 extends JPanel {
 		
 		boton=new JButton("Boton");
 		boton.setBounds(100, 80, 100, 30);
+		
+		//--------------------------------------------------------------------------------------------------
+		
+		//Funcion añadida por cosecha propia y asi usar el action listener de dos formas
+		
+		boton.addActionListener(new ActionListener(){
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+
+				JOptionPane.showMessageDialog(null, "Holis :3");
+			}});
+		
+		//--------------------------------------------------------------------------------------------------
 		add(boton);
 	}
 }
