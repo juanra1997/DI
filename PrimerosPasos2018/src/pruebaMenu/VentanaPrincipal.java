@@ -1,5 +1,7 @@
 package pruebaMenu;
 
+import java.awt.Color;
+
 //import java.awt.BorderLayout;
 
 import javax.swing.JFrame;
@@ -73,12 +75,14 @@ public class VentanaPrincipal extends JFrame {
 		//Creamos el menu emergente
 		menuEmergente=new JPopupMenu();
 		miPanel=new JPanel();
-		//miPanel.setLayout(null);
+		miPanel.setLayout(null);
 		itemEmergente1=new JMenuItem("Item 1");
 		itemEmergente2=new JMenuItem("Item 2");
 		
 		menuEmergente.add(itemEmergente1);
 		menuEmergente.add(itemEmergente2);
+		
+		//miPanel.setBackground(Color.BLACK);
 		
 		miPanel.setComponentPopupMenu(menuEmergente);
 		
