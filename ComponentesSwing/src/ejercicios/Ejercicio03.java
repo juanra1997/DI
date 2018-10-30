@@ -12,15 +12,12 @@ public class Ejercicio03 {
 
 	public static void main(String[] args) {
 
-		/*String[] fontNames=GraphicsEnvironment.getLocalGraphicsEnvironment().getAvailableFontFamilyNames();
-        for(int i=0; i<fontNames.length; i++) {
-        	System.out.println(fontNames[i]);
-        }*/
 		Ventana03 miVentana=new Ventana03();
         miVentana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         miVentana.setSize(1000, 400);
         miVentana.setLocationRelativeTo(null);
         miVentana.setResizable(false);
+        miVentana.setTitle("Ejercicio03");
         miVentana.setVisible(true);
         
 	}

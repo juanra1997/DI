@@ -27,6 +27,7 @@ public class Ejercicio06 {
         miVentana.setSize(500, 400);
         miVentana.setLocationRelativeTo(null);
         miVentana.setResizable(false);
+        miVentana.setTitle("Ejercicio06");
         miVentana.setVisible(true);
         
 	}
