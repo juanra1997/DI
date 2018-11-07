@@ -14,10 +14,6 @@ public class Ejercicio05 {
 
 	public static void main(String[] args) {
 
-		/*String[] fontNames=GraphicsEnvironment.getLocalGraphicsEnvironment().getAvailableFontFamilyNames();
-        for(int i=0; i<fontNames.length; i++) {
-        	System.out.println(fontNames[i]);
-        }*/
 		Ventana05 miVentana=new Ventana05();
         miVentana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         miVentana.setSize(200, 250);

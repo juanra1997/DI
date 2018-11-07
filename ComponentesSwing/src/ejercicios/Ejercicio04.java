@@ -43,7 +43,7 @@ class Ventana04 extends JFrame implements ChangeListener {
 		
 		deslizador=new JSlider(JSlider.HORIZONTAL, 8, 48, 20);
 		
-		deslizador.setBounds(430, 140, 100, 50);
+		deslizador.setBounds(430, 140, 200, 50);
 		deslizador.setPaintTicks(true);
 		deslizador.setMajorTickSpacing(20);
 		deslizador.setMinorTickSpacing(2);
