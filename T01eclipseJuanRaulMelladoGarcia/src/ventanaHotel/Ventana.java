@@ -29,7 +29,7 @@ public class Ventana extends JFrame implements ActionListener {
 
 		Toolkit t = Toolkit.getDefaultToolkit();
 		setSize((t.getScreenSize().width / 2), (t.getScreenSize().height / 2));
-		setIconImage(t.getImage("f1y0bb.png"));
+		setIconImage(t.getImage("diamante.png"));
 		// add(new MiPanel());
 
 		// Barra------------------------------------------------------------------------------------

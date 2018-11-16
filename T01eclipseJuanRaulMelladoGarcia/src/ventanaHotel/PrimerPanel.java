@@ -19,12 +19,22 @@ public class PrimerPanel extends JPanel{
 		
 		//add(new JButton("Boton"));
 	}*/
+	//--------------------------------------------------------------------------------------------------
+	
+	/*public PrimerPanel() {
+		
+		setLayout(null);
+		setBackground(Color.BLACK);
+		
+	}*/
+	
+	//--------------------------------------------------------------------------------------------------
 		
 	public void paintComponent(Graphics g) {
 		
 		g.setFont(new Font("Algerian", Font.PLAIN, 100));
-		g.setColor(Color.BLACK);
-		g.drawString("D", 30, 100);
-	//}
+		g.setColor(Color.WHITE);
+		g.drawString("HOTEL DIAMANTE", 30, 100);
 	}
+	//}
 }
