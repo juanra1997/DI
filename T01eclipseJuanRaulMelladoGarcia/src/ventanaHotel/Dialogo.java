@@ -37,7 +37,7 @@ public class Dialogo extends JDialog implements FocusListener, ActionListener{
 	JTextArea ta1, ta2;
 	JTextField cd, importe;
 	JCheckBox cb;
-	JSpinner nh;
+	//JSpinner nh;
 	JComboBox<String> tipo;
 	JSpinner ch;
 	JTabbedPane tpp;
@@ -113,7 +113,7 @@ public class Dialogo extends JDialog implements FocusListener, ActionListener{
 		qp.setBounds(400, 768, t.getScreenSize().width-400, 275);
 		add(qp);
 		
-		nh=tp.numeroHabitaciones;
+		//nh=tp.numeroHabitaciones;
 		cd=tp.diast;
 		importe=sp.importet;
 		cb=tp.ninnos;
@@ -218,6 +218,24 @@ public class Dialogo extends JDialog implements FocusListener, ActionListener{
 				}else {
 					
 					JOptionPane.showMessageDialog(null, "Datos guardados correctamente");
+					String prueba=dateFormat.format(fecha);
+					prueba=String.valueOf(Integer.parseInt(prueba.substring(0, 2))+1)+"/"+prueba.substring(3,5)+"/"+prueba.substring(6, 10);
+					
+					try {
+						fechass=dateFormat.parse(prueba);
+					} catch (ParseException pe) {
+						// TODO Auto-generated catch block
+						pe.printStackTrace();
+					}
+					
+					nombre.setText("");
+					apellidos.setText("");
+					direccion.setText("");
+					telefono.setText("");
+					fechae.setText(dateFormat.format(fecha));
+					fechas.setText(dateFormat.format(fechass));
+					ch.setValue(1);
+					tipo.setSelectedIndex(0);
 				}
 			}
 		}
@@ -226,9 +244,9 @@ public class Dialogo extends JDialog implements FocusListener, ActionListener{
 			
 			ta1.setText("Nombre: "+nombre.getText()+"\nApellidos: "+apellidos.getText()+"\nDireccion: "+direccion.getText()+"\nTelefono: "+telefono.getText());
 			if(cb.isSelected()) {
-				ta2.setText("Dias de estancia: "+ch.getValue()+"\nTipo: "+"\nNumero de habitaciones: "+"\nNiños: Si");
+				ta2.setText("Dias de estancia: "+cd.getText()+"\nTipo: "+tipo.getSelectedItem()+"\nNumero de habitaciones: "+ch.getValue()+"\nNiños: Si");
 			} else {
-				ta2.setText("Dias de estancia: "+ch.getValue()+"\nTipo: "+"\nNumero de habitaciones: "+"\nNiños: No");
+				ta2.setText("Dias de estancia: "+cd.getText()+"\nTipo: "+tipo.getSelectedItem()+"\nNumero de habitaciones: "+ch.getValue()+"\nNiños: No");
 			}
 		}
 	}

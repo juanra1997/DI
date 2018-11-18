@@ -2,13 +2,18 @@ package ventanaHotel;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
+
 import javax.swing.ButtonGroup;
+import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JSlider;
 
-public class QuintoPanel extends JPanel{
+public class QuintoPanel extends JPanel implements ItemListener{
 
 	private static final long serialVersionUID = 1L;
 	
@@ -16,6 +21,7 @@ public class QuintoPanel extends JPanel{
 	JSlider deslizador;
 	JRadioButton c1, c2;
 	ButtonGroup grupo;
+	//JButton boton;
 
 	public QuintoPanel() {
 		
@@ -47,11 +53,14 @@ public class QuintoPanel extends JPanel{
 		c1.setFont(new Font("Algerian", Font.PLAIN, 20));
 		c1.setBounds(200, 130, 100, 30);
 		c1.setBackground(Color.GREEN);
+		c1.addItemListener(this);
 		add(c1);
 		c2=new JRadioButton("NO");
 		c2.setFont(new Font("Algerian", Font.PLAIN, 20));
 		c2.setBackground(Color.GREEN);
 		c2.setBounds(200, 160, 100, 30);
+		c2.addItemListener(this);
+		//c2.setToolTipText("Mide lo comodo que se ha sentido el usuario con la interfaz");
 		add(c2);
 		
 		grupo=new ButtonGroup();
@@ -67,6 +76,34 @@ public class QuintoPanel extends JPanel{
 		deslizador.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		deslizador.setPaintLabels(true);
 		deslizador.setPaintTrack(true);
+		//deslizador.setToolTipText("Mide lo comodo que se ha sentido el usuario con la interfaz");
 		add(deslizador);
+		
+		/*boton=new JButton("Enviar");
+		boton.setBounds(900, 200, 100, 35);
+		boton.addItemListener(this);
+		add(boton);*/
+		
+		setToolTipText("Descubre y miide lo comodo que se ha sentido el usuario con la interfaz");
+	}
+
+	@Override
+	public void itemStateChanged(ItemEvent e) {
+		// TODO Auto-generated method stub
+		//JOptionPane.showMessageDialog(null, "Gracias por su colaboracion");
+		if(e.getSource()==c1) {
+			
+			if(c1.isSelected()) {
+				
+				JOptionPane.showMessageDialog(null, "Nos agrada de que le haya resultado comoda");
+			}
+		}
+		if(e.getSource()==c2) {
+			
+			if(c2.isSelected()) {
+					
+				JOptionPane.showMessageDialog(null, "Lamentamos que no le haya resultado comoda");
+			}
+		}
 	}
 }
