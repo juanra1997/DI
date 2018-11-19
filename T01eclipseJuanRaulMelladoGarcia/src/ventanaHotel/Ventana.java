@@ -25,12 +25,9 @@ public class Ventana extends JFrame implements ActionListener {
 
 	public Ventana() {
 
-		// setLayout(null);
-
 		Toolkit t = Toolkit.getDefaultToolkit();
 		setSize((t.getScreenSize().width / 2), (t.getScreenSize().height / 2));
 		setIconImage(t.getImage("diamante.png"));
-		// add(new MiPanel());
 
 		// Barra------------------------------------------------------------------------------------
 
@@ -99,7 +96,6 @@ public class Ventana extends JFrame implements ActionListener {
 		}
 		if (e.getSource() == alta || e.getSource() == boton) {
 
-			// System.out.println("Prueba");
 			Dialogo obj = new Dialogo(this, true);
 			obj.setLocationRelativeTo(null);
 			obj.setResizable(false);
