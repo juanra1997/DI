@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="f96a71c3-d65c-4375-8495-dacd9726fbee">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[SELECT
+     automoviles.`Color` AS automoviles_Color, count(*) AS Cantidad
+FROM
+     `automoviles` automoviles
+GROUP BY
+	automoviles.color]]>
+	</queryString>
+	<field name="automoviles_Color" class="java.lang.String"/>
+	<field name="Cantidad" class="java.lang.Long"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="420" splitType="Stretch">
+			<pieChart>
+				<chart evaluationTime="Report" theme="eye.candy.sixties">
+					<reportElement x="0" y="0" width="233" height="162" uuid="61d9602f-0934-4cac-a920-e06f18c1afbb"/>
+					<chartTitle/>
+					<chartSubtitle/>
+					<chartLegend/>
+				</chart>
+				<pieDataset>
+					<keyExpression><![CDATA[$F{automoviles_Color}]]></keyExpression>
+					<valueExpression><![CDATA[$F{Cantidad}]]></valueExpression>
+				</pieDataset>
+				<piePlot>
+					<plot/>
+					<itemLabel/>
+				</piePlot>
+			</pieChart>
+			<barChart>
+				<chart evaluationTime="Report">
+					<reportElement x="233" y="0" width="322" height="162" uuid="3b0da160-4fbe-4b54-86b4-08ddefe394d2"/>
+					<chartTitle/>
+					<chartSubtitle/>
+					<chartLegend/>
+				</chart>
+				<categoryDataset>
+					<categorySeries>
+						<seriesExpression><![CDATA["Dummy Series"]]></seriesExpression>
+						<categoryExpression><![CDATA[$F{automoviles_Color}]]></categoryExpression>
+						<valueExpression><![CDATA[$F{Cantidad}]]></valueExpression>
+					</categorySeries>
+				</categoryDataset>
+				<barPlot>
+					<plot/>
+					<itemLabel/>
+					<categoryAxisFormat>
+						<axisFormat/>
+					</categoryAxisFormat>
+					<valueAxisFormat>
+						<axisFormat/>
+					</valueAxisFormat>
+				</barPlot>
+			</barChart>
+		</band>
+	</title>
+</jasperReport>
