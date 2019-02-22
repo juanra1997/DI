@@ -120,3 +120,7 @@ hs_err_pid*
 /ServidorSSL/build/
 /DB4O/nbproject/private/
 /DB4O/build/
+/ClienteSSL/nbproject/private/
+/ClienteSSL/build/
+/ClienteSSL/dist/
+/ServidorSSL/dist/
