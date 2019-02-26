@@ -11,16 +11,12 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.io.BufferedInputStream;
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.io.PrintWriter;
 import java.net.ConnectException;
 import java.net.InetAddress;
 import java.net.Socket;
@@ -40,8 +36,6 @@ public class CtrlVistaCliente implements ActionListener, KeyListener {
     VistaCliente cliente;
     String frase, clave, cifrado, resultado;
     Socket socket;
-    BufferedReader in;
-    PrintWriter out;
     InetAddress ip;
     File elegido, recibido;
     ObjectOutputStream oout;
@@ -56,9 +50,7 @@ public class CtrlVistaCliente implements ActionListener, KeyListener {
     public CtrlVistaCliente(VistaCliente c) {
 
         cifrado = "aes32";
-
         cliente = c;
-
         cliente.bCifrar.addActionListener(this);
         cliente.bSalir.addActionListener(this);
         cliente.bDescifrar.addActionListener(this);
@@ -91,22 +83,7 @@ public class CtrlVistaCliente implements ActionListener, KeyListener {
                 ip = InetAddress.getByName(cliente.txtIp.getText());
                 socket = new Socket(ip, Integer.parseInt(cliente.txtPuerto.getText()));
 
-                System.out.println("Conexion establecida");
-
-                in = new BufferedReader(new InputStreamReader(/*input*/socket.getInputStream()));
-
-                System.out.println("a");
-
-                out = new PrintWriter(socket.getOutputStream(), true);
-
-                System.out.println("b");
-
                 oout = new ObjectOutputStream(socket.getOutputStream());
-
-                System.out.println("c");
-
-                //oin = new ObjectInputStream(input);
-                System.out.println("d");
                 
                 if(formato.equalsIgnoreCase("archivo")){
 
@@ -114,38 +91,21 @@ public class CtrlVistaCliente implements ActionListener, KeyListener {
                 
                 }
 
-                System.out.println("e");
-
                 leidos = 0;
-
                 creado = false;
-
-                //pfich = new ParteFichero();
-                //pfich.setNombreFichero(elegido.getName());
-                //pfich.setUltimaParte(false);
-                System.out.println("Cosas creadas");
-
-                out.println(formato);
-
-                System.out.println("Formato enviado");
-
+                oout.writeObject(formato);
+                
                 if (formato.equalsIgnoreCase("frase")) {
-
-                    out.println(cliente.txtFrase.getText());
                     
-                    System.out.println("Frase enviada");
-
+                    oout.writeObject(cliente.txtFrase.getText());
+                    
                 } else if (formato.equalsIgnoreCase("archivo")) {
-
-                    System.out.println("Supuestamente antes de enviar");
 
                     do {
 
                         pfich = new ParteFichero();
                         pfich.setNombreFichero(elegido.getName());
                         leidos = bis.read(pfich.getParte());
-
-                        System.out.println("Supuestamente enviando");
 
                         if (leidos < 0) {
 
@@ -169,25 +129,20 @@ public class CtrlVistaCliente implements ActionListener, KeyListener {
 
                     } while (!pfich.isUltimaParte());
 
+                    bis.close();
                     pfich = null;
 
                 }
 
-                System.out.println("Supuestamente enviado");
-
-                //elegido = null;
-
-                out.println(cliente.txtClave.getText());
-                out.println(cifrado);
-                out.println(accion);
+                oout.writeObject(cliente.txtClave.getText());
+                oout.writeObject(cifrado);
+                oout.writeObject(accion);
 
                 if (formato.equalsIgnoreCase("frase")) {
-                    
-                    //System.out.println(in.readLine());
-                    
+
                     oin = new ObjectInputStream(socket.getInputStream());
 
-                    cliente.txtResultado.setText(String.valueOf(oin.readObject()));
+                    cliente.txtResultado.setText(String.valueOf(oin.readObject()).trim());
 
                 } else if (formato.equalsIgnoreCase("archivo")) {
 
@@ -199,19 +154,16 @@ public class CtrlVistaCliente implements ActionListener, KeyListener {
 
                         aux = oin.readObject();
 
-                        System.out.println("Recibiendo");
-
                         if (aux instanceof ParteFichero) {
 
                             pfich = (ParteFichero) aux;
 
                             if (!creado) {
 
-                                //System.out.println();
                                 recibido = new File(elegido.getParent()+"\\"+pfich.getNombreFichero());
                                 creado = true;
                                 fos = new FileOutputStream(recibido);
-                                //System.out.println(recibido);
+
                             }
 
                             fos.write(pfich.getParte(), 0, pfich.getBytesValidos());
@@ -221,31 +173,17 @@ public class CtrlVistaCliente implements ActionListener, KeyListener {
                     } while (!pfich.isUltimaParte());
 
                     fos.close();
+                    cliente.txtResultado.setText("La accion de "+accion+" se ha realizado correctamente");
 
                 }
-
-                //in.close();
-                out.close();
-                oout.close();
-                oin.close();
                 
-                if(formato.equalsIgnoreCase("archivo")){
-                    
-                    bis.close();
-                }
-                //fos.close();
-
-                pfich = null;
-                
+                oin=null;
+                oout=null;
                 elegido=null;
-                
                 recibido=null;
-
                 socket.close();
-                
                 cliente.txtArchivo.setText("");
 
-                //System.out.println(socket.isClosed());
             } catch (UnknownHostException ex) {
 
                 Logger.getLogger(CtrlVistaCliente.class.getName()).log(Level.SEVERE, null, ex);
@@ -259,26 +197,27 @@ public class CtrlVistaCliente implements ActionListener, KeyListener {
                 Logger.getLogger(CtrlVistaCliente.class.getName()).log(Level.SEVERE, null, ex);
 
             } catch (ClassNotFoundException ex) {
+                
                 Logger.getLogger(CtrlVistaCliente.class.getName()).log(Level.SEVERE, null, ex);
+            
             }
+            
         }
 
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
         if (e.getSource() == cliente.bCifrar) {
 
             if (!cliente.txtFrase.getText().isEmpty()) {
 
-                realizarAccion("cifrar", "frase");
+                realizarAccion("cifrado", "frase");
 
             } else if (!cliente.txtArchivo.getText().isEmpty()) {
 
-                System.out.println("Listo");
-
-                realizarAccion("cifrar", "archivo");
+                realizarAccion("cifrado", "archivo");
 
             } else {
 
@@ -292,8 +231,11 @@ public class CtrlVistaCliente implements ActionListener, KeyListener {
 
             cliente.choser.showOpenDialog(cliente);
             elegido = cliente.choser.getSelectedFile();
+            
             try {
+                
                 cliente.txtArchivo.setText(elegido.getAbsolutePath());
+                
             } catch (Exception ex) {
 
             }
@@ -310,11 +252,11 @@ public class CtrlVistaCliente implements ActionListener, KeyListener {
 
             if (!cliente.txtFrase.getText().isEmpty()) {
 
-                realizarAccion("descifrar", "frase");
+                realizarAccion("descifrado", "frase");
 
             } else if (!cliente.txtArchivo.getText().isEmpty()) {
 
-                realizarAccion("descifrar", "archivo");
+                realizarAccion("descifrado", "archivo");
 
             } else {
 
@@ -368,14 +310,15 @@ public class CtrlVistaCliente implements ActionListener, KeyListener {
 
         if (e.getSource() == cliente.iAyuda) {
 
-            JOptionPane.showMessageDialog(null, "Aplicacion desarrollada por Juan Raul Mellado Garcia");
+            JOptionPane.showMessageDialog(null, "Introduce solo un archivo o una frase\nEn el caso de que se introduzcan las dos cosas, solo se aplicara la accion a la frase\nEl archivo convertido se guarda en el mismo lugar en el que se encuentra el seleccionado\nAplicacion desarrollada por Juan Raul Mellado Garcia");
 
         }
+        
     }
 
     @Override
     public void keyTyped(KeyEvent e) {
-        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
         if (e.getSource() == cliente.txtPuerto) {
 
             if (!Character.isDigit(e.getKeyChar())) {
@@ -388,12 +331,12 @@ public class CtrlVistaCliente implements ActionListener, KeyListener {
 
     @Override
     public void keyPressed(KeyEvent e) {
-        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
     }
 
     @Override
     public void keyReleased(KeyEvent e) {
-        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
     }
 
 }

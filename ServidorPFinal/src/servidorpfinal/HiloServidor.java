@@ -11,10 +11,8 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.io.PrintWriter;
 import java.net.Socket;
 import java.nio.file.Files;
 import java.security.InvalidKeyException;
@@ -41,7 +39,6 @@ public class HiloServidor implements Runnable {
     Socket con;
     JTextArea area;
     BufferedReader in;
-    //PrintWriter out;
     String frase, clave, cifrado, accion, resultado;
     byte[] objetobyte, passbprov, passb, objetoconvertido;
     SecretKey pass;
@@ -57,7 +54,6 @@ public class HiloServidor implements Runnable {
     int leidos;
     BufferedInputStream bis;
     ObjectOutputStream oout;
-    String f;
 
     public HiloServidor(Socket c, JTextArea a) {
 
@@ -65,41 +61,23 @@ public class HiloServidor implements Runnable {
         area = a;
         codificador = Base64.getEncoder();
         decodificador = Base64.getDecoder();
-        creado = false;
-        //leidos=0;
 
     }
 
     public void realizarAccion(String formato) {
-        
-        System.out.println("Listo");
-        
-        System.out.println(formato);
 
         try {
 
             if (formato.equalsIgnoreCase("frase")) {
 
-                frase = in.readLine().trim();
-                System.out.println(frase);
-                
-                System.out.println("Listo2");
+                frase = String.valueOf(oin.readObject()).trim();
 
             } else if (formato.equalsIgnoreCase("archivo")) {
-                
-                System.out.println("Listo para recibir el archivo");
-                
-                oin = new ObjectInputStream(con.getInputStream());
 
                 do {
 
                     pfich = new ParteFichero();
-                    
-                    System.out.println("ParteFIchero creada");
-
                     aux = oin.readObject();
-
-                    System.out.println("Recibiendo");
 
                     if (aux instanceof ParteFichero) {
 
@@ -123,11 +101,9 @@ public class HiloServidor implements Runnable {
 
             }
 
-            clave = in.readLine().trim();
-            cifrado = in.readLine().trim();
-            accion = in.readLine().trim();
-
-            //if (!frase.isEmpty()) {
+            clave = String.valueOf(oin.readObject()).trim();
+            cifrado = String.valueOf(oin.readObject()).trim();
+            accion = String.valueOf(oin.readObject()).trim();
             area.setText(area.getText() + "***********************************\n");
 
             if (formato.equalsIgnoreCase("frase")) {
@@ -172,22 +148,27 @@ public class HiloServidor implements Runnable {
 
             switch (accion) {
 
-                case "cifrar":
+                case "cifrado":
 
-                    area.setText(area.getText() + "Ha seleccionado cifrar como accion\nConvirtiendo la cadena...\n");
+                    area.setText(area.getText() + "Ha seleccionado cifrado como accion\n");
                     cifrador.init(Cipher.ENCRYPT_MODE, pass);
                     if (formato.equalsIgnoreCase("frase")) {
+                        
+                        area.setText(area.getText()+"Convirtiendo la cadena...\n");
                         objetobyte = frase.getBytes("UTF8");
+                        
                     } else if (formato.equalsIgnoreCase("archivo")) {
 
+                        area.setText(area.getText()+"Convirtiendo el archivo...\n");
                         objetobyte = Files.readAllBytes(recibido.toPath());
 
                     }
+                    
                     objetoconvertido = cifrador.doFinal(objetobyte);
+                    
                     if (formato.equalsIgnoreCase("frase")) {
 
                         area.setText(area.getText() + "Cadena convertida\nDevolviendo cadena...\n");
-                        //System.out.println(codificador.encodeToString(objetoconvertido));
                         oout.writeObject(codificador.encodeToString(objetoconvertido));
                         area.setText(area.getText() + "Cadena devuelta\n");
 
@@ -200,7 +181,6 @@ public class HiloServidor implements Runnable {
                         try {
 
                             stream.write(objetoconvertido);
-                            //System.out.println(objetoconvertido);
 
                         } catch (Exception e) {
 
@@ -209,19 +189,20 @@ public class HiloServidor implements Runnable {
                             stream.close();
 
                         }
+                        
                         area.setText(area.getText() + "Archivo escrito\n");
-                        //area.setText(area.getText() + "Archivo devuelto\n");
+
                         area.setText(area.getText() + "Devolviendo archivo...\n");
-                        //area.setText(area.getText() + "Archivo devuelto\n");
 
                     }
 
                     break;
 
-                case "descifrar":
+                case "descifrado":
 
-                    area.setText(area.getText() + "Ha seleccionado descifrar como accion\nConvirtiendo la cadena...\n");
+                    area.setText(area.getText() + "Ha seleccionado descifrado como accion\nConvirtiendo la cadena...\n");
                     cifrador.init(Cipher.DECRYPT_MODE, pass);
+                    
                     if (formato.equalsIgnoreCase("frase")) {
 
                         objetobyte = decodificador.decode(frase);
@@ -231,11 +212,15 @@ public class HiloServidor implements Runnable {
                         objetobyte = Files.readAllBytes(recibido.toPath());
 
                     }
+                    
                     objetoconvertido = cifrador.doFinal(objetobyte);
+                    
                     if (formato.equalsIgnoreCase("frase")) {
+                        
                         area.setText(area.getText() + "Cadena convertida\nDevolviendo cadena...\n");
                         oout.writeObject(new String(objetoconvertido));
                         area.setText(area.getText() + "Cadena devuelta\n");
+                        
                     } else if (formato.equalsIgnoreCase("archivo")) {
 
                         area.setText(area.getText() + "Archivo convertido\n");
@@ -245,7 +230,6 @@ public class HiloServidor implements Runnable {
                         try {
 
                             stream.write(objetoconvertido);
-                            //System.out.println(objetoconvertido);
 
                         } catch (Exception e) {
 
@@ -254,76 +238,73 @@ public class HiloServidor implements Runnable {
                             stream.close();
 
                         }
+                        
                         area.setText(area.getText() + "Archivo escrito\n");
-                        //area.setText(area.getText() + "Archivo devuelto\n");
                         area.setText(area.getText() + "Devolviendo archivo...\n");
 
-                        //area.setText(area.getText() + "Archivo devuelto\n");
                     }
+                    
                     break;
 
             }
 
             if (formato.equalsIgnoreCase("archivo")) {
 
-                if (accion.equalsIgnoreCase("cifrar")) {
+                if (accion.equalsIgnoreCase("cifrado")) {
 
                     elegido = new File("cifrado" + recibido.getName());
-                    //System.out.println("Holis");
 
-                } else if (accion.equalsIgnoreCase("descifrar")) {
+                } else if (accion.equalsIgnoreCase("descifrado")) {
 
                     elegido = new File("descifrado" + recibido.getName());
-                    //System.out.println("Holis");
 
                 }
-                
-                bis = new BufferedInputStream(new FileInputStream(elegido));
-                
-                leidos=0;
-                
-                do {
-                        
-                        pfich = new ParteFichero();
-                        pfich.setNombreFichero(elegido.getName());
-                        leidos=bis.read(pfich.getParte());
-                        
-                        System.out.println("Supuestamente enviando");
 
-                        if (leidos < 0) {
-                            
-                            break;
-                        
-                        }
-                        
-                        pfich.setBytesValidos(leidos);
-                        
-                        if (leidos < 1024) {
-                        
-                            pfich.setUltimaParte(true);
-                        
-                        } else {
-                        
-                            pfich.setUltimaParte(false);
-                        
-                        }
-                        
-                        oout.writeObject(pfich);
-                    
-                    } while(!pfich.isUltimaParte());
-                
+                bis = new BufferedInputStream(new FileInputStream(elegido));
+                leidos = 0;
+
+                do {
+
+                    pfich = new ParteFichero();
+                    pfich.setNombreFichero(elegido.getName());
+                    leidos = bis.read(pfich.getParte());
+
+                    if (leidos < 0) {
+
+                        break;
+
+                    }
+
+                    pfich.setBytesValidos(leidos);
+
+                    if (leidos < 1024) {
+
+                        pfich.setUltimaParte(true);
+
+                    } else {
+
+                        pfich.setUltimaParte(false);
+
+                    }
+
+                    oout.writeObject(pfich);
+
+                } while (!pfich.isUltimaParte());
+
+                bis.close();
                 area.setText(area.getText() + "Archivo enviado\n");
-                
+
             }
 
             area.setText(area.getText() + "***********************************\n");
-
             area.setCaretPosition(area.getDocument().getLength());
-            
-            elegido=null;
-            recibido=null;
+            elegido.delete();
+            recibido.delete();
+            elegido = null;
+            recibido = null;
+            oin.close();
+            oout.close();
 
-            //}
         } catch (IOException ex) {
 
             Logger.getLogger(HiloServidor.class.getName()).log(Level.SEVERE, null, ex);
@@ -334,26 +315,34 @@ public class HiloServidor implements Runnable {
 
         } catch (IllegalBlockSizeException ex) {
 
-            //Logger.getLogger(HiloServidor.class.getName()).log(Level.SEVERE, null, ex);
             area.setText(area.getText() + "Error de codificacion\nNotificando...\n");
+            
             try {
                 oout.writeObject("Error en la codificacion");
+                
             } catch (IOException ex1) {
+                
                 Logger.getLogger(HiloServidor.class.getName()).log(Level.SEVERE, null, ex1);
+            
             }
+            
             area.setText(area.getText() + "Notificado\n");
             area.setText(area.getText() + "***********************************\n");
             area.setCaretPosition(area.getDocument().getLength());
 
         } catch (BadPaddingException ex) {
 
-            //Logger.getLogger(HiloServidor.class.getName()).log(Level.SEVERE, null, ex);
             area.setText(area.getText() + "Error de cifrado o contraseña\nNotificando...\n");
+            
             try {
+                
                 oout.writeObject("Error en el tipo de cifrado o contraseña");
+                
             } catch (IOException ex1) {
+                
                 Logger.getLogger(HiloServidor.class.getName()).log(Level.SEVERE, null, ex1);
             }
+            
             area.setText(area.getText() + "Notificado\n");
             area.setText(area.getText() + "***********************************\n");
             area.setCaretPosition(area.getDocument().getLength());
@@ -368,56 +357,29 @@ public class HiloServidor implements Runnable {
 
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(HiloServidor.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {
-
-            try {
-
-                in.close();
-                //out.close();
-                if(f.equalsIgnoreCase("archivo")){
-                    oin.close();
-                    oout.close();
-                }
-
-            } catch (IOException ex) {
-
-                Logger.getLogger(HiloServidor.class.getName()).log(Level.SEVERE, null, ex);
-
-            }
         }
 
     }
 
     @Override
     public void run() {
-        
+
         try {
-            
-            in = new BufferedReader(new InputStreamReader(con.getInputStream()));
-            
-            f = in.readLine();
-            
-            System.out.println("Formato leido");
-            
-            //if(f.equalsIgnoreCase("frase")){
 
-            
-            //out = new PrintWriter(con.getOutputStream(), true);
-            
-            //}else if(f.equalsIgnoreCase("archivo")){
-            
-            //oin = new ObjectInputStream(con.getInputStream());
             oout = new ObjectOutputStream(con.getOutputStream());
-            
-           // }
-
-
-            System.out.println("Formato recibido");
-            
-            realizarAccion(f);
+            oin = new ObjectInputStream(con.getInputStream());
+            realizarAccion(String.valueOf(oin.readObject()));
 
         } catch (IOException ex) {
+            
             Logger.getLogger(HiloServidor.class.getName()).log(Level.SEVERE, null, ex);
+        
+        } catch (ClassNotFoundException ex) {
+            
+            Logger.getLogger(HiloServidor.class.getName()).log(Level.SEVERE, null, ex);
+        
         }
+        
     }
+    
 }
