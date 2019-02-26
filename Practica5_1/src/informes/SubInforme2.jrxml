@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="270" pageHeight="401" columnWidth="270" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="5ad0cf0a-f5ce-48b5-b0cf-b5cc4f70c732">
+	<property name="ireport.zoom" value="3.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="288"/>
+	<queryString>
+		<![CDATA[select oficinas.codigo as 'Codigo oficina', comerciales.* from oficinas inner join comerciales on comerciales.codOficina=oficinas.codigo where comerciales.codOficina=$P{Oficina};]]>
+	</queryString>
+	<field name="Codigo oficina" class="java.lang.String"/>
+	<field name="codigo" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="nombre" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="salario" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="hijos" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="fNacimiento" class="java.sql.Date">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="codOficina" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="vehiculoAsig" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<detail>
+		<band height="282" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="71" height="20" uuid="97bd5622-36ab-419e-9ebc-73fadea59ea3"/>
+				<text><![CDATA[Codigo oficina:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="71" y="0" width="100" height="20" uuid="17686446-0ed5-4bb4-a759-939c25674eda"/>
+				<textFieldExpression><![CDATA[$F{Codigo oficina}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="27" y="20" width="66" height="20" uuid="94dc1387-4c27-4534-a8f9-37d8825cbb96"/>
+				<text><![CDATA[COMERCIAL:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="27" y="40" width="44" height="20" uuid="7692930c-e314-4175-9276-b65f71a18f8e"/>
+				<text><![CDATA[Codigo:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="71" y="40" width="100" height="20" uuid="828ee9b4-8bb0-4d3e-95d2-9092f8f7cb58"/>
+				<textFieldExpression><![CDATA[$F{codigo}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="27" y="60" width="44" height="20" uuid="7331133b-0909-4c15-9810-05e91e3103ae"/>
+				<text><![CDATA[Nombre:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="71" y="60" width="100" height="20" uuid="8c727c28-fea0-412e-99f3-5507dcb6446a"/>
+				<textFieldExpression><![CDATA[$F{nombre}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="27" y="80" width="44" height="20" uuid="e0f7f8be-d7a6-4dcb-a67e-c2450f980c10"/>
+				<text><![CDATA[Salario:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="71" y="80" width="100" height="20" uuid="1a2374e4-1319-4d17-8e5b-3700cbf8092b"/>
+				<textFieldExpression><![CDATA[$F{salario}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="27" y="100" width="44" height="20" uuid="d8144a93-a4de-49fc-bc73-83cd0b871952"/>
+				<text><![CDATA[Hijos:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="71" y="100" width="100" height="20" uuid="24e470ff-b215-4508-914c-2ab99e1406e8"/>
+				<textFieldExpression><![CDATA[$F{hijos}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="27" y="120" width="86" height="20" uuid="83a3da3c-a424-4352-8c4e-90a5a468b63b"/>
+				<text><![CDATA[Fecha nacimiento:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="113" y="120" width="100" height="20" uuid="60fb16d6-1cfc-4d3c-b243-0351d1ef2962"/>
+				<textFieldExpression><![CDATA[$F{fNacimiento}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="27" y="140" width="44" height="20" uuid="71c49036-ed38-428a-bb48-a4ead59d5216"/>
+				<text><![CDATA[Oficina:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="71" y="140" width="100" height="20" uuid="d6d5c012-bd7c-4b5a-ab6b-4dff85c9d9c3"/>
+				<textFieldExpression><![CDATA[$F{codOficina}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="27" y="160" width="44" height="20" uuid="c3956a11-d668-4179-90c4-567b731f2dbd"/>
+				<text><![CDATA[Vehiculo:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="71" y="160" width="100" height="20" uuid="2105c780-ac41-43ff-a160-5317ef86ce01"/>
+				<textFieldExpression><![CDATA[$F{vehiculoAsig}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>
