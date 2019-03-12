@@ -10,9 +10,13 @@ import controlador.CtrlEsqueleto;
 import vista.*;
 import modelo.*;
 import controlador.*;
+import java.io.File;
+import java.net.URL;
+import javax.help.HelpBroker;
+import javax.help.HelpSet;
 
 /**
- *
+ *  Clase que ejecuta la aplicacion
  * @author Juanra
  */
 public class Main {
@@ -33,9 +37,12 @@ public class Main {
     //static ConsultasVehiculos consultasVehiculos;
     //static Producto producto;
     //static Vehiculo vehiculo;
-    
+    /**
+     * Metodo que permite la ejecucion de la aplicacion
+     * @param args argumentos que pueden ser introducidos desde la terminal al ejecutar el programa
+     */
     public static void main(String[] args){
-        
+
         esqueleto = new Esqueleto();
         
         ayuda=new PanelAyuda();

@@ -11,17 +11,25 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 /**
- *
+ * Clase para realizar las acciones sobre la tabla productos de la base de datos
  * @author Juanra
  */
 public class ConsultasProductos {
     
     private Connection con;
-    
+    /**
+     * Constructor
+     * @param c Objeto de tipo Connection que recibe el constructor
+     */
     public ConsultasProductos(Connection c){
         
         con=c;
     }
+    /**
+     * Metodo para guardar los datos
+     * @param p Objeto de tipo producto con el que se opera
+     * @return devuelve true si se ha podido realizar la operacion o false sino se ha podido
+     */
     public boolean guardar(Producto p){
         
         PreparedStatement ps=null;
@@ -54,7 +62,11 @@ public class ConsultasProductos {
             }
         }*/
     }
-    
+    /**
+     * Metodo para actualizar los datos
+     * @param p Objeto de tipo producto con el que se opera
+     * @return devuelve true si se ha podido realizar la operacion o false sino se ha podido
+     */
     public boolean actualizar(Producto p){
         
         PreparedStatement ps=null;
@@ -87,7 +99,11 @@ public class ConsultasProductos {
             }
         }*/
     }
-    
+    /**
+     * Metodo para eliminar datos
+     * @param p Objeto de tipo producto con el que se opera
+     * @return devuelve true si se ha podido realizar la operacion o false sino se ha podido
+     */
     public boolean eliminar(Producto p){
         
         PreparedStatement ps=null;
@@ -117,7 +133,11 @@ public class ConsultasProductos {
             }
         }*/
     }
-    
+    /**
+     * Metodo para buscar los datos
+     * @param p Objeto de tipo producto con el que se opera
+     * @return devuelve true si se ha podido realizar la operacion o false sino se ha podido
+     */
     public boolean buscar(Producto p){
         
         PreparedStatement ps=null;

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<toc version="1.0">
+   <tocitem text="Principal" target="principal"/>
+   <tocitem text="Ventana Ayuda" target="ayuda">
+       <tocitem text="Boton vehiculos" target="bvehiculos"/>
+       <tocitem text="Boton productos" target="bproductos"/>      
+       <tocitem text="Boton salir" target="bsalir"/>
+   </tocitem>
+   <tocitem text="Ventana productos" target="productos">
+       <tocitem text="Productos: buscar" target="pbuscar"/>
+       <tocitem text="Productos: actualizar" target="pactualizar"/>
+       <tocitem text="Productos: guardar" target="pguardar"/>
+       <tocitem text="Productos: borrar" target="pborrar"/>
+       <tocitem text="Productos: limpiar" target="plimpiar"/>
+   </tocitem>
+   <tocitem text="Ventana vehiculos" target="vehiculos">
+       <tocitem text="Vehiculos: buscar" target="vbuscar"/>
+       <tocitem text="Vehiculos: actualizar" target="vactualizar"/>
+       <tocitem text="Vehiculos: guardar" target="vguardar"/>
+       <tocitem text="Vehiculos: borrar" target="vborrar"/>
+       <tocitem text="Vehiculos: limpiar" target="vlimpiar"/>
+   </tocitem>
+   <tocitem text="Ventana informes" target="informes">
+       <tocitem text="Boton informe" target="binforme"/>
+       <tocitem text="Boton pdf" target="bpdf"/>
+   </tocitem>
+</toc>

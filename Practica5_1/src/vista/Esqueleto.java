@@ -8,7 +8,7 @@ package vista;
 import java.awt.Color;
 
 /**
- *
+ * Clase que proporcion la vista esqueleto
  * @author Juanra
  */
 public class Esqueleto extends javax.swing.JFrame {
@@ -42,6 +42,7 @@ public class Esqueleto extends javax.swing.JFrame {
         mAyuda = new javax.swing.JMenu();
         iAyuda = new javax.swing.JMenuItem();
         iInfo = new javax.swing.JMenuItem();
+        MAyuda = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setResizable(false);
@@ -84,6 +85,9 @@ public class Esqueleto extends javax.swing.JFrame {
         iInfo.setText("Info");
         mAyuda.add(iInfo);
 
+        MAyuda.setText("Mostrar Ayuda...");
+        mAyuda.add(MAyuda);
+
         mBar.add(mAyuda);
 
         setJMenuBar(mBar);
@@ -115,9 +119,6 @@ public class Esqueleto extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_iInformesActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
     //public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -151,6 +152,7 @@ public class Esqueleto extends javax.swing.JFrame {
     }*/
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    public javax.swing.JMenuItem MAyuda;
     public javax.swing.JMenuItem iAyuda;
     public javax.swing.JMenuItem iInfo;
     public javax.swing.JMenuItem iInformes;

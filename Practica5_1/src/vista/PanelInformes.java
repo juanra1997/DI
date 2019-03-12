@@ -6,7 +6,7 @@
 package vista;
 
 /**
- *
+ * Clase que proporcion la vista informes
  * @author Juanra
  */
 public class PanelInformes extends javax.swing.JPanel {

@@ -6,7 +6,7 @@
 package vista;
 
 /**
- *
+ * Clase que proporcion la vista productos
  * @author Juanra
  */
 public class PanelProductos extends javax.swing.JPanel {

@@ -173,7 +173,7 @@ public class CtrlVistaCliente implements ActionListener, KeyListener {
                     } while (!pfich.isUltimaParte());
 
                     fos.close();
-                    cliente.txtResultado.setText("La accion de "+accion+" se ha realizado correctamente");
+                    JOptionPane.showMessageDialog(null, "La accion de "+accion+" se ha realizado correctamente");
 
                 }
                 

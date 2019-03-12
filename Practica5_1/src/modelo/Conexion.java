@@ -12,18 +12,21 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- *
+ * Clase que conecta a la base de datos
  * @author Juanra
  */
 public class Conexion {
     
-    private /*static*/ final String base = "tienda";
+    private /*static*/ final String base = "empresa";
     private /*static*/ final String user = "root";
     private /*static*/ final String password = "";
     //private /*static*/ final String ssl = "&useSSL=false";
     //private final String url = "jdbc:mysql://localhost:3306/"+base;
     private /*static*/ Connection con = null;
-    
+    /**
+     * Metodo que devuelve la conexion a la base de datos
+     * @return devuelve un objeto de tipo Connection para poder acceder y operar con la base de datos
+     */
     public Connection getConexion(){
     //public static void main(String[] args){
         try{

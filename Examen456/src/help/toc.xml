@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<toc version="1.0">
+   <tocitem text="Principal" target="principal"/>
+   <tocitem text="Ventana Ayuda" target="ayuda">
+       <tocitem text="Boton vehiculos" target="bvehiculos"/>
+       <tocitem text="Boton productos" target="bproductos"/>      
+       <tocitem text="Boton salir" target="bsalir"/>
+   </tocitem>
+   <tocitem text="Ventana cursos" target="cursos">
+       <tocitem text="Cursos: buscar" target="pbuscar"/>
+       <tocitem text="Cursos: actualizar" target="pactualizar"/>
+       <tocitem text="Cursos: guardar" target="pguardar"/>
+       <tocitem text="Cursos: borrar" target="pborrar"/>
+       <tocitem text="Cursos: limpiar" target="plimpiar"/>
+   </tocitem>
+   <tocitem text="Ventana informes" target="informes">
+       <tocitem text="Boton informe" target="binforme"/>
+       <tocitem text="Boton pdf" target="bpdf"/>
+   </tocitem>
+</toc>

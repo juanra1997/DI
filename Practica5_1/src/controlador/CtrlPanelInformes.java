@@ -13,14 +13,17 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.io.File;
 import java.io.IOException;
-import java.sql.SQLException;
+import java.net.URL;
+//import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+//import java.util.logging.Level;
+//import java.util.logging.Logger;
+import javax.help.HelpBroker;
+import javax.help.HelpSet;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
-import modelo.Conexion;
+//import modelo.Conexion;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperExportManager;
 import net.sf.jasperreports.engine.JasperFillManager;
@@ -29,7 +32,7 @@ import net.sf.jasperreports.view.JasperViewer;
 import vista.PanelInformes;
 
 /**
- *
+ * Clase que controla las acciones que se realizan al pulsar los botones de la vista informes
  * @author Juanra
  */
 public class CtrlPanelInformes implements ActionListener, KeyListener{
@@ -42,6 +45,7 @@ public class CtrlPanelInformes implements ActionListener, KeyListener{
     
     public CtrlPanelInformes(PanelInformes pi, Connection c){
         
+        //Ayuda();
         panelInformes=pi;
         con=c;
         panelInformes.informe1.addActionListener(this);
@@ -60,7 +64,39 @@ public class CtrlPanelInformes implements ActionListener, KeyListener{
         panelInformes.pdf1.addActionListener(this);
         
     }
-
+    /**
+     * Metodo que permite mostrar la ayuda en la ventanaa
+     */
+    /*
+    public void Ayuda(){
+        try{
+            //System.out.println("Creado");
+            File fichero =new File("src/help/help_set.hs");
+            URL hsURL=fichero.toURI().toURL();
+            HelpSet helpset=new HelpSet(getClass().getClassLoader(), hsURL);
+            HelpBroker hb=helpset.createHelpBroker();
+            hb.enableHelpOnButton(panelInformes, "principal", helpset);
+            hb.enableHelpKey(panelInformes.informe1, "binforme", helpset);
+            hb.enableHelpKey(panelInformes.informe2, "binforme", helpset);
+            hb.enableHelpKey(panelInformes.informe3, "binforme", helpset);
+            hb.enableHelpKey(panelInformes.informe4, "binforme", helpset);
+            hb.enableHelpKey(panelInformes.informe5, "binforme", helpset);
+            hb.enableHelpKey(panelInformes.informe6, "binforme", helpset);
+            hb.enableHelpKey(panelInformes.pdf1, "bpdf", helpset);
+            hb.enableHelpKey(panelInformes.pdf2, "bpdf", helpset);
+            hb.enableHelpKey(panelInformes.pdf3, "bpdf", helpset);
+            hb.enableHelpKey(panelInformes.pdf4, "bpdf", helpset);
+            hb.enableHelpKey(panelInformes.pdf5, "bpdf", helpset);
+            hb.enableHelpKey(panelInformes.pdf6, "bpdf", helpset);
+            
+        }catch(Exception e){
+            
+        }
+    }*/
+    /**
+     * ActionListener que ejecuta la accion del boton que se presiona
+     * @param e Evento que genera al presionar el boton
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -244,7 +280,10 @@ public class CtrlPanelInformes implements ActionListener, KeyListener{
             JOptionPane.showMessageDialog(null, "No he conseguido enlazarlos");
         }
     }
-
+    /**
+     * KeyListener que limita los campos de texto indicados
+     * @param e Evento que genera al presionar el boton
+     */
     @Override
     public void keyTyped(KeyEvent e) {
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.

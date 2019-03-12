@@ -10,14 +10,18 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.io.File;
+import java.net.URL;
 import java.sql.Date;
+import javax.help.HelpBroker;
+import javax.help.HelpSet;
 import javax.swing.JOptionPane;
 import modelo.ConsultasVehiculos;
 import modelo.Vehiculo;
 import vista.PanelVehiculos;
 
 /**
- *
+ * Clase que controla las acciones que se realizan al pulsar los botones de la vista vehiculos
  * @author Juanra
  */
 public class CtrlPanelVehiculos implements ActionListener, KeyListener{
@@ -33,7 +37,7 @@ public class CtrlPanelVehiculos implements ActionListener, KeyListener{
     public CtrlPanelVehiculos(PanelVehiculos pv, Connection c){
         
         //conexion=c;
-        
+        //Ayuda();
         vehiculo=new Vehiculo();
         
         consultas=new ConsultasVehiculos(c);
@@ -49,7 +53,10 @@ public class CtrlPanelVehiculos implements ActionListener, KeyListener{
         panelVehiculos.txtKilometros.addKeyListener(this);
         
     }
-
+    /**
+     * ActionListener que ejecuta la accion del boton que se presiona
+     * @param e Evento que genera al presionar el boton
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -60,7 +67,7 @@ public class CtrlPanelVehiculos implements ActionListener, KeyListener{
             vehiculo.setMatricula(panelVehiculos.txtMatricula.getText());
             
             if(consultas.buscar(vehiculo)){
-                JOptionPane.showMessageDialog(null, "Registro encontado");
+                JOptionPane.showMessageDialog(null, "Registro encontrado");
                 panelVehiculos.txtMatricula.setText(vehiculo.getMatricula());
                 panelVehiculos.txtMarca.setText(vehiculo.getMarca());
                 panelVehiculos.txtModelo.setText(vehiculo.getModelo());
@@ -84,7 +91,7 @@ public class CtrlPanelVehiculos implements ActionListener, KeyListener{
             vehiculo.setFechaRevision(Date.valueOf(panelVehiculos.txtRevision.getText()));
             
             if(consultas.guardar(vehiculo)){
-                JOptionPane.showMessageDialog(null, "Registro guradado");
+                JOptionPane.showMessageDialog(null, "Registro guardado");
                 limpiar();
             }else{
                 JOptionPane.showMessageDialog(null, "Error al guardar el registro");
@@ -119,7 +126,9 @@ public class CtrlPanelVehiculos implements ActionListener, KeyListener{
             }
         }
     }
-    
+    /**
+     * Metodo para limpiar los campos de texto
+     */
     public void limpiar(){
         panelVehiculos.txtMatricula.setText("");
         panelVehiculos.txtMarca.setText("");
@@ -127,7 +136,27 @@ public class CtrlPanelVehiculos implements ActionListener, KeyListener{
         panelVehiculos.txtKilometros.setText("");
         panelVehiculos.txtRevision.setText("");
     }
-
+    /**
+     * Metodo que permite mostrar la ayuda en la ventanaa
+     */
+    /*
+    public void Ayuda(){
+        try{
+            File fichero =new File("src/help/help_set.hs");
+            URL hsURL=fichero.toURI().toURL();
+            HelpSet helpset=new HelpSet(getClass().getClassLoader(), hsURL);
+            HelpBroker hb=helpset.createHelpBroker();
+            hb.enableHelpOnButton(panelVehiculos, "vehiculos", helpset);
+            
+            
+        }catch(Exception e){
+            
+        }
+    }*/
+    /**
+     * KeyListener que limita los campos de texto indicados
+     * @param e Evento que genera al introducir un valor
+     */
     @Override
     public void keyTyped(KeyEvent e) {
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.

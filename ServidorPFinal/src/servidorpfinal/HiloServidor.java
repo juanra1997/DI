@@ -23,6 +23,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
+import javax.crypto.CipherOutputStream;
 import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
 import javax.crypto.SecretKey;
@@ -40,7 +41,7 @@ public class HiloServidor implements Runnable {
     JTextArea area;
     BufferedReader in;
     String frase, clave, cifrado, accion, resultado;
-    byte[] objetobyte, passbprov, passb, objetoconvertido;
+    byte[] objetobyte, passbprov, passb, objetoconvertido, buffer;
     SecretKey pass;
     Cipher cifrador;
     Base64.Encoder codificador;
@@ -54,6 +55,8 @@ public class HiloServidor implements Runnable {
     int leidos;
     BufferedInputStream bis;
     ObjectOutputStream oout;
+    FileInputStream fis;
+    CipherOutputStream cip;
 
     public HiloServidor(Socket c, JTextArea a) {
 
@@ -61,7 +64,8 @@ public class HiloServidor implements Runnable {
         area = a;
         codificador = Base64.getEncoder();
         decodificador = Base64.getDecoder();
-
+        //buffer = new byte[1024];
+        
     }
 
     public void realizarAccion(String formato) {
@@ -109,10 +113,12 @@ public class HiloServidor implements Runnable {
             if (formato.equalsIgnoreCase("frase")) {
 
                 area.setText(area.getText() + "Ha llegado una cadena\n");
+                area.setCaretPosition(area.getDocument().getLength());
 
             } else if (formato.equalsIgnoreCase("archivo")) {
 
                 area.setText(area.getText() + "Ha llegado un archivo\n");
+                area.setCaretPosition(area.getDocument().getLength());
 
             }
 
@@ -123,6 +129,7 @@ public class HiloServidor implements Runnable {
                 case "des":
 
                     area.setText(area.getText() + "Ha seleccionado 3DES como cifrado\n");
+                    area.setCaretPosition(area.getDocument().getLength());
                     passb = copyOf(passbprov, 24);
                     pass = new SecretKeySpec(passb, "DESede");
                     cifrador = Cipher.getInstance("DESede");
@@ -131,6 +138,7 @@ public class HiloServidor implements Runnable {
                 case "aes16":
 
                     area.setText(area.getText() + "Ha seleccionado AES 16 como cifrado\n");
+                    area.setCaretPosition(area.getDocument().getLength());
                     passb = copyOf(passbprov, 16);
                     pass = new SecretKeySpec(passb, "AES");
                     cifrador = Cipher.getInstance("AES/ECB/PKCS5PADDING");
@@ -139,6 +147,7 @@ public class HiloServidor implements Runnable {
                 case "aes32":
 
                     area.setText(area.getText() + "Ha seleccionado AES 32 como cifrado\n");
+                    area.setCaretPosition(area.getDocument().getLength());
                     passb = copyOf(passbprov, 32);
                     pass = new SecretKeySpec(passb, "AES");
                     cifrador = Cipher.getInstance("AES/ECB/PKCS5PADDING");
@@ -151,32 +160,54 @@ public class HiloServidor implements Runnable {
                 case "cifrado":
 
                     area.setText(area.getText() + "Ha seleccionado cifrado como accion\n");
+                    area.setCaretPosition(area.getDocument().getLength());
                     cifrador.init(Cipher.ENCRYPT_MODE, pass);
                     if (formato.equalsIgnoreCase("frase")) {
                         
                         area.setText(area.getText()+"Convirtiendo la cadena...\n");
+                        area.setCaretPosition(area.getDocument().getLength());
                         objetobyte = frase.getBytes("UTF8");
+                        objetoconvertido = cifrador.doFinal(objetobyte);
                         
                     } else if (formato.equalsIgnoreCase("archivo")) {
 
                         area.setText(area.getText()+"Convirtiendo el archivo...\n");
-                        objetobyte = Files.readAllBytes(recibido.toPath());
+                        area.setCaretPosition(area.getDocument().getLength());
+                        //objetobyte = Files.readAllBytes(recibido.toPath());
+                        /****/
+                        buffer=new byte[1024];
+                        fis = new FileInputStream(recibido);
+                        cip = new CipherOutputStream(new FileOutputStream("cifrado"+recibido.getName()), cifrador);
+                        leidos=0;
+                        
+                        while((leidos=fis.read(buffer))>0){
+                            
+                            cip.write(buffer, 0, leidos);
+                            
+                        }
+                        
+                        fis.close();
+                        cip.close();
+                        /****/
 
                     }
                     
-                    objetoconvertido = cifrador.doFinal(objetobyte);
+                    
                     
                     if (formato.equalsIgnoreCase("frase")) {
 
                         area.setText(area.getText() + "Cadena convertida\nDevolviendo cadena...\n");
+                        area.setCaretPosition(area.getDocument().getLength());
                         oout.writeObject(codificador.encodeToString(objetoconvertido));
                         area.setText(area.getText() + "Cadena devuelta\n");
+                        area.setCaretPosition(area.getDocument().getLength());
 
                     } else if (formato.equalsIgnoreCase("archivo")) {
 
                         area.setText(area.getText() + "Archivo convertido\n");
                         area.setText(area.getText() + "Escribiendo archivo\n");
-                        FileOutputStream stream = new FileOutputStream("cifrado" + recibido.getName());
+                        area.setCaretPosition(area.getDocument().getLength());
+                        /*FileOutputStream stream = new FileOutputStream("cifrado" + recibido.getName());
 
                         try {
 
@@ -188,11 +219,12 @@ public class HiloServidor implements Runnable {
 
                             stream.close();
 
-                        }
+                        }*/
                         
                         area.setText(area.getText() + "Archivo escrito\n");
 
                         area.setText(area.getText() + "Devolviendo archivo...\n");
+                        area.setCaretPosition(area.getDocument().getLength());
 
                     }
 
@@ -201,31 +233,51 @@ public class HiloServidor implements Runnable {
                 case "descifrado":
 
                     area.setText(area.getText() + "Ha seleccionado descifrado como accion\nConvirtiendo la cadena...\n");
+                    area.setCaretPosition(area.getDocument().getLength());
                     cifrador.init(Cipher.DECRYPT_MODE, pass);
                     
                     if (formato.equalsIgnoreCase("frase")) {
 
                         objetobyte = decodificador.decode(frase);
+                        objetoconvertido = cifrador.doFinal(objetobyte);
 
                     } else if (formato.equalsIgnoreCase("archivo")) {
 
                         objetobyte = Files.readAllBytes(recibido.toPath());
+                        /****/
+                        buffer=new byte[1024];
+                        fis = new FileInputStream(recibido);
+                        cip = new CipherOutputStream(new FileOutputStream("descifrado"+recibido.getName()), cifrador);
+                        leidos=0;
+                        
+                        while((leidos=fis.read(buffer))>0){
+                            
+                            cip.write(buffer, 0, leidos);
+                            
+                        }
+                        
+                        fis.close();
+                        cip.close();
+                        /****/
 
                     }
                     
-                    objetoconvertido = cifrador.doFinal(objetobyte);
+                    //objetoconvertido = cifrador.doFinal(objetobyte);
                     
                     if (formato.equalsIgnoreCase("frase")) {
                         
                         area.setText(area.getText() + "Cadena convertida\nDevolviendo cadena...\n");
+                        area.setCaretPosition(area.getDocument().getLength());
                         oout.writeObject(new String(objetoconvertido));
                         area.setText(area.getText() + "Cadena devuelta\n");
+                        area.setCaretPosition(area.getDocument().getLength());
                         
                     } else if (formato.equalsIgnoreCase("archivo")) {
 
                         area.setText(area.getText() + "Archivo convertido\n");
                         area.setText(area.getText() + "Escribiendo archivo\n");
-                        FileOutputStream stream = new FileOutputStream("descifrado" + recibido.getName());
+                        area.setCaretPosition(area.getDocument().getLength());
+                        /*FileOutputStream stream = new FileOutputStream("descifrado" + recibido.getName());
 
                         try {
 
@@ -237,10 +289,11 @@ public class HiloServidor implements Runnable {
 
                             stream.close();
 
-                        }
+                        }*/
                         
                         area.setText(area.getText() + "Archivo escrito\n");
                         area.setText(area.getText() + "Devolviendo archivo...\n");
+                        area.setCaretPosition(area.getDocument().getLength());
 
                     }
                     
@@ -298,8 +351,11 @@ public class HiloServidor implements Runnable {
 
             area.setText(area.getText() + "***********************************\n");
             area.setCaretPosition(area.getDocument().getLength());
-            elegido.delete();
-            recibido.delete();
+            
+            if(formato.equalsIgnoreCase("archivo")){
+                elegido.delete();
+                recibido.delete();
+            }
             elegido = null;
             recibido = null;
             oin.close();

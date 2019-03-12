@@ -6,7 +6,7 @@
 package vista;
 
 /**
- *
+ * Clase que proporcion la vista vehiculos
  * @author Juanra
  */
 public class PanelVehiculos extends javax.swing.JPanel {
@@ -86,7 +86,7 @@ public class PanelVehiculos extends javax.swing.JPanel {
         borrar.setText("Borrar");
         borrar.setFocusPainted(false);
 
-        txtMatricula.setToolTipText("Campo numerico, solo admite numeros");
+        txtMatricula.setToolTipText("");
 
         buscar.setBackground(new java.awt.Color(0, 0, 0));
         buscar.setForeground(new java.awt.Color(255, 255, 255));

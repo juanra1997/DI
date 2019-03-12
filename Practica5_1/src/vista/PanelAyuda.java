@@ -6,7 +6,7 @@
 package vista;
 
 /**
- *
+ * Clase que proporcion la vista ayuda
  * @author Juanra
  */
 public class PanelAyuda extends javax.swing.JPanel {
@@ -71,7 +71,7 @@ public class PanelAyuda extends javax.swing.JPanel {
         salir.setText("Salir");
         salir.setFocusPainted(false);
 
-        jLabel9.setText("◾LAS FECHAS ESTAN EN FORMATO AAA-MM-DD, ES IMPORTANTE INTRODUCIRLAS ASI");
+        jLabel9.setText("◾LAS FECHAS ESTAN EN FORMATO AAAA-MM-DD, ES IMPORTANTE INTRODUCIRLAS ASI");
 
         jLabel8.setText("◾PARA SALIR DE LA APLICACION HAY QUE HACERLO DESDE ARCHIVO->SALIR O DESDE");
 

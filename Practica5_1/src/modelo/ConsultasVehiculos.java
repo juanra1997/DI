@@ -16,151 +16,181 @@ import java.sql.SQLException;
  * @author Juanra
  */
 public class ConsultasVehiculos {
-    
+
     private Connection con;
-    
-    public ConsultasVehiculos(Connection c){
-        
-        con=c;
+    /**
+     * Constructor
+     * @param c Objeto de tipo Connection que recibe el constructor
+     */
+    public ConsultasVehiculos(Connection c) {
+
+        con = c;
     }
-    
-        public boolean guardar(Vehiculo v){
-        
-        PreparedStatement ps=null;
-        
-        String sql="insert into vehiculos values (?,?,?,?,?)";
-        
-        try{
-            ps=(PreparedStatement) con.prepareStatement(sql);
-            
+    /**
+     * Metodo para guardar los datos
+     * @param v Objeto de tipo Vehiculo con el que se opera
+     * @return devuelve true si se ha podido realizar la operacion o false sino se ha podido
+     */
+    public boolean guardar(Vehiculo v) {
+
+        PreparedStatement ps = null;
+
+        String sql = "insert into vehiculos values (?,?,?,?,?)";
+
+        try {
+            ps = (PreparedStatement) con.prepareStatement(sql);
+
             ps.setString(1, v.getMatricula());
             ps.setString(2, v.getMarca());
             ps.setString(3, v.getModelo());
             ps.setInt(4, v.getKilometros());
             ps.setDate(5, v.getFechaRevision());
-            
+
             ps.execute();
-            
+
             return true;
-            
-        }catch(SQLException e){
-            
+
+        } catch (SQLException e) {
+
             System.err.println(e);
-            
+
             return false;
         }/*finally{
-            try{
-                con.close();
-            }catch(SQLException e){
-                System.err.println(e);
-            }
-        }*/
+         try{
+         con.close();
+         }catch(SQLException e){
+         System.err.println(e);
+         }
+         }*/
+
     }
-    
-    public boolean actualizar(Vehiculo v){
-        
-        PreparedStatement ps=null;
-        
-        String sql="update vehiculos set marca=?, modelo=?, nKilometros=?, fRevision=? where matricula=?";
-        
-        try{
-            ps=(PreparedStatement) con.prepareStatement(sql);
-            
-            
+
+    /**
+     * Metodo para actualizar los datos
+     *
+     * @param v Objeto de tipo Vehiculo con el que se opera
+     * @return devuelve true si se ha podido realizar la operacion o false sino
+     * se ha podido
+     */
+    public boolean actualizar(Vehiculo v) {
+
+        PreparedStatement ps = null;
+
+        String sql = "update vehiculos set marca=?, modelo=?, nKilometros=?, fRevision=? where matricula=?";
+
+        try {
+            ps = (PreparedStatement) con.prepareStatement(sql);
+
             ps.setString(1, v.getMarca());
             ps.setString(2, v.getModelo());
             ps.setInt(3, v.getKilometros());
             ps.setDate(4, v.getFechaRevision());
             ps.setString(5, v.getMatricula());
 
-            
             ps.execute();
-            
+
             return true;
-            
-        }catch(SQLException e){
-            
+
+        } catch (SQLException e) {
+
             System.err.println(e);
-            
+
             return false;
         }/*finally{
-            try{
-                con.close();
-            }catch(SQLException e){
-                System.err.println(e);
-            }
-        }*/
+         try{
+         con.close();
+         }catch(SQLException e){
+         System.err.println(e);
+         }
+         }*/
+
     }
-    
-    public boolean eliminar(Vehiculo v){
-        
-        PreparedStatement ps=null;
+
+    /**
+     * Metodo para eliminar datos
+     *
+     * @param v Objeto de tipo Vehiculo con el que se opera
+     * @return devuelve true si se ha podido realizar la operacion o false sino
+     * se ha podido
+     */
+    public boolean eliminar(Vehiculo v) {
+
+        PreparedStatement ps = null;
         //Connection con=getConexion();
-        
-        String sql="delete from vehiculos where matricula=?";
-        
-        try{
-            ps=(PreparedStatement) con.prepareStatement(sql);
-            
+
+        String sql = "delete from vehiculos where matricula=?";
+
+        try {
+            ps = (PreparedStatement) con.prepareStatement(sql);
+
             ps.setString(1, v.getMatricula());
-            
+
             ps.execute();
-            
+
             return true;
-            
-        }catch(SQLException e){
-            
+
+        } catch (SQLException e) {
+
             System.err.println(e);
-            
+
             return false;
         }/*finally{
-            try{
-                con.close();
-            }catch(SQLException e){
-                System.err.println(e);
-            }
-        }*/
+         try{
+         con.close();
+         }catch(SQLException e){
+         System.err.println(e);
+         }
+         }*/
+
     }
-    
-    public boolean buscar(Vehiculo v){
-        
-        PreparedStatement ps=null;
-        ResultSet result=null;
+
+    /**
+     * Metodo para buscar los datos
+     *
+     * @param v Objeto de tipo Vehiculo con el que se opera
+     * @return devuelve true si se ha podido realizar la operacion o false sino
+     * se ha podido
+     */
+    public boolean buscar(Vehiculo v) {
+
+        PreparedStatement ps = null;
+        ResultSet result = null;
         //Connection con=getConexion();
-        
-        String sql="select * from vehiculos where matricula=?";
-        
-        try{
-            ps=(PreparedStatement) con.prepareStatement(sql);
-            
+
+        String sql = "select * from vehiculos where matricula=?";
+
+        try {
+            ps = (PreparedStatement) con.prepareStatement(sql);
+
             ps.setString(1, v.getMatricula());
-            
-            result=ps.executeQuery();
-            
-            if(result.next()){
-                
+
+            result = ps.executeQuery();
+
+            if (result.next()) {
+
                 v.setMatricula(result.getString("matricula"));
                 v.setMarca(result.getString("marca"));
                 v.setModelo(result.getString("modelo"));
                 v.setKilometros(Integer.parseInt(result.getString("nKilometros")));
                 v.setFechaRevision(Date.valueOf(result.getString("fRevision")));
-                
+
                 return true;
             }
-            
+
             return false;
-            
-        }catch(SQLException e){
-            
+
+        } catch (SQLException e) {
+
             System.err.println(e);
-            
+
             return false;
         }/*finally{
-            try{
-                con.close();
-            }catch(SQLException e){
-                System.err.println(e);
-            }
-        }*/
+         try{
+         con.close();
+         }catch(SQLException e){
+         System.err.println(e);
+         }
+         }*/
+
     }
 }
